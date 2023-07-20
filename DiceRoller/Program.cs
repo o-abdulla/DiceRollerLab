@@ -10,13 +10,13 @@ while (runProgram)
 {
     
     Console.WriteLine("Enter 6 for craps to roll dice or enter a different number of sides for your dice to have");
-    int sides1 = 0;
-    while (true)
+    int sides = 0;
+    while (true)        // while (TryParse(Console.ReadLine(), out sides1) == false || sides <= 0) then cw
     {
         try
         {
-            sides1 = int.Parse(Console.ReadLine());
-            if (sides1 > 0)
+            sides = int.Parse(Console.ReadLine());
+            if (sides > 0)
             {
                 break;
             }
@@ -32,11 +32,12 @@ while (runProgram)
         
     }
 
-    Random rand = new Random();
+    //Random rand = new Random(); <--- removed this and made into a method
 
-
-    int score1 = rand.Next(1, sides1 + 1);
-    int score2 = rand.Next(1, sides1 + 1);
+    
+    // plug in methods 
+    int score1 = GetRandom(sides);
+    int score2 = GetRandom(sides);
     int sum = score1 + score2;
 
     Console.WriteLine($"Dice 1 rolled a {score1}");
@@ -45,6 +46,8 @@ while (runProgram)
     Console.WriteLine(DiceRoll(score1, score2));
     Console.WriteLine(Totals(sum));
 
+
+    // Ask to continue playing game
     while (true)
     {
 
@@ -112,4 +115,13 @@ static string DiceRoll(int score1, int score2)
     {
         return "";
     }
+}
+
+
+// method for random
+
+static int GetRandom(int s)
+{
+    Random r = new Random();
+    return r.Next(1, s + 1);
 }
